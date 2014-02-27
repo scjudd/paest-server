@@ -71,9 +71,11 @@ class Response:
         """ Content type to set on the response """
         return self.fmt.content_type()
 
-    def not_found(self):
+    def not_found(self, handler):
         """ Paest was not found in backend """
-        return self.fmt.format(e="paest not found")
+        handler.clear()
+        handler.set_status(404)
+        handler.finish(self.fmt.format(e="paest not found"))
 
     def invalid_post(self):
         """ POST content was invalid """

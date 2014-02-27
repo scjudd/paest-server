@@ -32,7 +32,7 @@ class PaestServer(RequestHandler):
 
         paest = self.paestdb.get_paest(p_id)
         if paest is None:
-            raise tornado.web.HTTPError(404, responder.not_found())
+            return responder.not_found(self)
         else:
             raise tornado.web.HTTPError(200, responder.raw(paest.content))
 
